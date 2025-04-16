@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+  mon:
+    build: .
+    container_name: ceph-mon
+    network_mode: host
+    environment:
+      - MON_IP=192.168.1.31
+      - CEPH_PUBLIC_NETWORK=192.168.1.0/24
+    volumes:
+      - ceph-mon-data:/var/lib/ceph
+
+  mgr:
+    build: .
+    container_name: ceph-mgr
+    network_mode: host
+    depends_on:
+      - mon
+    volumes:
+      - ceph-mgr-data:/var/lib/ceph
+
+  osd:
+    build: .
+    container_name: ceph-osd
+    network_mode: host
+    privileged: true
+    depends_on:
+      - mon
+    volumes:
+      - ceph-osd-data:/var/lib/ceph
+      - /dev:/dev
+
+volumes:
+  ceph-mon-data:
+  ceph-mgr-data:
+  ceph-osd-data:
