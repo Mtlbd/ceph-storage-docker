@@ -122,4 +122,4 @@ docker exec ceph-mon ceph -s
 
 ---
 
->  by Mohammad Talebi
+> Created by [Mohammad Talebi](https://linkedin.com/in/mtlbd) – DevOps Engineer 👨‍💻
